@@ -27,6 +27,12 @@ You can use it by running 'pvm use 8.1'.
 $ nvm use 8.1
 Now using PHP version 8.1.
 
+$ php -v
+PHP 8.1.27 (cli) (built: Dec 21 2023 20:19:54) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.1.27, Copyright (c) Zend Technologies
+    with Zend OPcache v8.1.27, Copyright (c), by Zend Technologies
+
 $ nvm uninstall 8.1
 PHP version 8.1 is uninstalled.
 ```
