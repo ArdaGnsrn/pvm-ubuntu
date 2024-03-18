@@ -1,7 +1,18 @@
 # PHP Version Manager For Ubuntu
 
-## Introduction
 This is a CLI tool to manage PHP versions on Ubuntu. It's a C program that can be used to install, uninstall, and switch between PHP versions. It's a simple tool that can be used to manage PHP versions on Ubuntu.
+
+⭐⭐\
+*If you like this project, please consider **starring it**. Stars are a way to show appreciation and interest in this
+project. And who knows, I may be more inclined to improve it further.*\
+⭐⭐
+
+## Buy me a coffee
+
+Whether you use this project, have learned something from it, or just like it, please consider supporting it by buying
+me a coffee, so I can dedicate more time on open-source projects like this :)
+
+<a href="https://www.buymeacoffee.com/ardagnsrn" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Installation
 To install the tool, you can run the following commands:
