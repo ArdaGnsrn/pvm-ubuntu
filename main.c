@@ -3,6 +3,9 @@
 #include <string.h>
 #include <unistd.h>
 
+#define VERSION "1.1.0"
+#define UPDATE_CMD "curl -o- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.sh | bash"
+
 int is_php_package_available(char *version);
 
 int install_apt_repository_if_not_exists();
@@ -23,22 +26,28 @@ char *current_php_version();
 
 void uninstall_command(int argc, char *argv[]);
 
+void update_command();
+
+void version_command();
+
 int main(int argc, char *argv[]) {
     install_apt_repository_if_not_exists();
     if (argc < 2) {
         printf("\n");
-        printf("Running version 1.0.0.\n");
-        printf("Powered by Arda GUNSUREN.\n");
+        printf("Running version %s.\n", VERSION);
+        printf("https://github.com/ArdaGnsrn/pvm-ubuntu/\n");
         printf("\n");
         printf("Usage:\n");
-        printf("  pvm install <version>\t:\tInstall a PHP version.\n");
-        printf("  pvm use <version>\t:\tUse a PHP version.\n");
-        printf("  pvm list\t\t:\tList installed PHP versions.\n");
+        printf("  pvm install <version>\t\t:\tInstall a PHP version.\n");
+        printf("  pvm use <version>\t\t:\tUse a PHP version.\n");
+        printf("  pvm list\t\t\t:\tList installed PHP versions.\n");
         printf("  pvm uninstall <version>\t:\tUninstall a PHP version.\n");
+        printf("\n");
+        printf("  pvm update\t\t\t:\tUpdate to the latest version.\n");
+        printf("  pvm version\t\t\t:\tShow the current version.\n");
         printf("\n");
         return 1;
     }
-
 
     if (strcmp(argv[1], "install") == 0) {
         install_command(argc, argv);
@@ -48,6 +57,10 @@ int main(int argc, char *argv[]) {
         use_command(argc, argv);
     } else if (strcmp(argv[1], "list") == 0) {
         list_command();
+    } else if (strcmp(argv[1], "update") == 0) {
+        update_command();
+    } else if (strcmp(argv[1], "version") == 0) {
+        version_command();
     } else {
         return main(1, argv);
     }
@@ -76,6 +89,16 @@ char *current_php_version() {
 
     pclose(fp);
     return "";
+}
+
+void version_command() {
+    printf("Running version %s.", VERSION);
+    printf("\n");
+}
+
+void update_command() {
+    system(UPDATE_CMD);
+    printf("Updated to the latest version.\n");
 }
 
 void list_command() {
