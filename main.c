@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
-#define VERSION "1.1.0"
+#define VERSION "1.2.0"
 #define UPDATE_CMD "curl -o- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.sh | bash"
+#define UPDATE_CHECK_INTERVAL (6 * 60 * 60)
 
 int is_php_package_available(char *version);
 
@@ -30,8 +32,11 @@ void update_command();
 
 void version_command();
 
+int update_checker();
+
 int main(int argc, char *argv[]) {
     install_apt_repository_if_not_exists();
+
     if (argc < 2) {
         printf("\n");
         printf("Running version %s.\n", VERSION);
@@ -46,8 +51,14 @@ int main(int argc, char *argv[]) {
         printf("  pvm update\t\t\t:\tUpdate to the latest version.\n");
         printf("  pvm version\t\t\t:\tShow the current version.\n");
         printf("\n");
+        if (update_checker()) {
+            printf("\n");
+            printf("There is a new version available. You can update by running 'pvm update'.\n");
+            printf("\n");
+        }
         return 1;
     }
+
 
     if (strcmp(argv[1], "install") == 0) {
         install_command(argc, argv);
@@ -99,6 +110,40 @@ void version_command() {
 void update_command() {
     system(UPDATE_CMD);
     printf("Updated to the latest version.\n");
+}
+
+int update_checker() {
+    time_t now;
+    time_t last_checked;
+
+    time(&now);
+
+    FILE *file;
+    file = fopen("/tmp/pvm-update-checker", "r");
+    if (file != NULL) {
+        char last_checked_str[20];
+        fgets(last_checked_str, 20, file);
+        last_checked = (time_t) strtol(last_checked_str, (char **) NULL, 10);
+        fclose(file);
+    } else {
+        last_checked = 0;
+    }
+
+    if (now - last_checked > UPDATE_CHECK_INTERVAL) {
+        system("curl --silent \"https://api.github.com/repos/ardagnsrn/pvm-ubuntu/releases/latest\" | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/' > /tmp/pvm-latest-version");
+    }
+
+    file = fopen("/tmp/pvm-latest-version", "r");
+    if (file != NULL) {
+        char latest_version[20];
+        fgets(latest_version, 20, file);
+        fclose(file);
+
+        if (strstr(latest_version, VERSION) == NULL) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void list_command() {
