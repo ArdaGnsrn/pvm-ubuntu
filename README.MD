@@ -28,17 +28,17 @@ wget -qO- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.
 To use the tool, you can run the following commands:
 
 ```sh
-$ nvm list
+$ pvm list
 Available PHP versions:
     7.3
     7.4
   * 8.2
   
-$ nvm install 8.1
+$ pvm install 8.1
 PHP version 8.1 is installed.
 You can use it by running 'pvm use 8.1'.
 
-$ nvm use 8.1
+$ pvm use 8.1
 Now using PHP version 8.1.
 
 $ php -v
@@ -47,7 +47,7 @@ Copyright (c) The PHP Group
 Zend Engine v4.1.27, Copyright (c) Zend Technologies
     with Zend OPcache v8.1.27, Copyright (c), by Zend Technologies
 
-$ nvm uninstall 8.1
+$ pvm uninstall 8.1
 PHP version 8.1 is uninstalled.
 ```
 
