@@ -18,10 +18,10 @@ me a coffee, so I can dedicate more time on open-source projects like this :)
 To install the tool, you can run the following commands:
 
 ```sh
-curl -o- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.sh | bash
+curl -o- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.sh | sudo bash
 ```
 ```sh
-wget -qO- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/ArdaGnsrn/pvm-ubuntu/master/install.sh | sudo bash
 ```
 
 ## Usage
